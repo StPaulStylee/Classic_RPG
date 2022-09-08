@@ -1,0 +1,58 @@
+{
+    "name": "CharacterControls",
+    "maps": [
+        {
+            "name": "CharacterController",
+            "id": "58f4d02e-83ab-4b17-9e19-d9ab59660d3e",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Button",
+                    "id": "67f70b87-89f0-4e21-ba74-5f63398d8c36",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "CursorPosition",
+                    "type": "Value",
+                    "id": "63ab20a1-f7cd-43c7-9f36-a354fa940240",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": ""
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "9f0250b1-918e-4e59-b570-112f2e70b464",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "07b4f464-6a3c-4d55-bf29-3fade23fc0ef",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "CursorPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "Keyboard",
+            "bindingGroup": "Keyboard",
+            "devices": []
+        }
+    ]
+}
