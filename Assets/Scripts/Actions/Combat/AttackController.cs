@@ -69,6 +69,7 @@ namespace Game.Actions.Combat {
         return;
       }
       if (IsAttackEnabled()) {
+        Attack();
         animator.ResetTrigger(onStopAttackHash);
         transform.LookAt(target.transform);
         animator.SetTrigger(onAttackHash);

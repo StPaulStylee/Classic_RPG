@@ -55,7 +55,6 @@ namespace Game.Actions {
         if (attackController.IsAttackable(target.gameObject) && !attackController.IsWithinRange(target.gameObject)) {
           moveController.StartMoveAction(target.transform.position, 1f);
           attackController.SetTarget(target.gameObject);
-          attackController.Attack();
           return false;
         }
         if (attackController.IsAttackable(target.gameObject)) {
