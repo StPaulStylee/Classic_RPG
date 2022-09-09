@@ -10,10 +10,10 @@ namespace Game.Core {
         return;
       }
       if (CurrentAction != null) {
-        Debug.Log($"Cancelling {CurrentAction}");
+        // Debug.Log($"Cancelling {CurrentAction}");
         CurrentAction.Cancel();
       }
-      Debug.Log($"Starting {action}");
+      // Debug.Log($"Starting {action}");
       CurrentAction = action;
     }
 

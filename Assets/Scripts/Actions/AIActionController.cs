@@ -65,7 +65,7 @@ namespace Game.Actions {
       ExecutePatrolBehavior();
     }
 
-    private void OnDrawGizmosSelected() {
+    private void OnDrawGizmos() {
       Gizmos.color = Color.red;
       Gizmos.DrawWireSphere(transform.position, chaseRadius);
     }
@@ -73,6 +73,7 @@ namespace Game.Actions {
 
     private void ExecutePatrolBehavior() {
       if (IsInChaseRange() && attackController.IsAttackable(playerInstance) && !attackController.IsWithinRange(playerInstance)) {
+        timeSinceLastSawPlayer = 0f;
         moveController.StartMoveAction(playerInstance.transform.position, 0.8f);
         return;
       }
