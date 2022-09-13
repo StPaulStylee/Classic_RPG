@@ -20,7 +20,7 @@ namespace Game.Core {
 
     public void TakeDamage(float damage) {
       currentHealth = Mathf.Clamp(currentHealth - damage, 0, currentHealth);
-      Debug.Log(currentHealth);
+      // Debug.Log(currentHealth);
       if (currentHealth == 0) {
         Die();
       }
