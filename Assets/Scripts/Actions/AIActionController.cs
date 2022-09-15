@@ -54,7 +54,7 @@ namespace Game.Actions {
         Debug.LogError($"{name} did not locate a player in the scene!");
       }
       if (patrolPathController == null) {
-        Debug.LogWarning($"This {name} does not have an associated PatrolPathController. This must be assigned in the editor!");
+        // Debug.LogWarning($"This {name} does not have an associated PatrolPathController. This must be assigned in the editor!");
       }
     }
 
