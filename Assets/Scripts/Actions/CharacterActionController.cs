@@ -26,15 +26,17 @@ namespace Game.Actions {
       healthController = GetComponent<HealthController>();
     }
 
+    void Start() {
+      mainCamera = Camera.main;
+      Debug.Log("CharacterActionController: " + transform.position);
+    }
+
     private void OnDisable() {
       playerInput.Disable();
     }
 
     private void OnEnable() {
       playerInput.Enable();
-    }
-    void Start() {
-      mainCamera = Camera.main;
     }
 
     void Update() {
