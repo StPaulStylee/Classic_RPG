@@ -8,12 +8,17 @@ using Game.SceneManagement.SO;
 
 namespace Game.SceneManagement {
   public class ScenePortal : MonoBehaviour {
-    [SerializeField]
-    ScenePortal_SO scenePortalData;
-    [SerializeField]
-    Transform spawnPoint;
+    [SerializeField] ScenePortal_SO scenePortalData;
+    [SerializeField] Transform spawnPoint;
+    [SerializeField] Fader sceneFadeInOut;
     private void Awake() {
       DontDestroyOnLoad(gameObject);
+    }
+
+    private void Start() {
+      if (sceneFadeInOut == null) {
+        sceneFadeInOut = FindObjectOfType<Fader>();
+      }
     }
 
     private void OnTriggerEnter(Collider other) {
@@ -23,13 +28,16 @@ namespace Game.SceneManagement {
     }
 
     private IEnumerator TransitionToScene() {
+      // StartCoroutine(sceneFadeInOut.FadeIn());
+      yield return sceneFadeInOut.FadeIn();
       // Finding all of the portals in the current scene here so they can all be properly destroyed 
-      // once the scene transition is finished. Another way to do this possibly is to just have the 
-      // spawnTo position data in the SO.
+      // once the scene transition is finished.
       ScenePortal[] portals = FindObjectsOfType<ScenePortal>();
       yield return SceneManager.LoadSceneAsync(scenePortalData.SceneIndexToLoad);
       ScenePortal portalToSpawnTo = GetSpawnToPortal();
       SetPlayerPosition(portalToSpawnTo);
+      yield return sceneFadeInOut.FadeWait();
+      yield return sceneFadeInOut.FadeOut();
       foreach (ScenePortal portal in portals) {
         Destroy(portal.gameObject);
       }
