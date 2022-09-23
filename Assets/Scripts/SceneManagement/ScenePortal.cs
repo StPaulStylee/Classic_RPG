@@ -8,14 +8,8 @@ using Game.SceneManagement.SO;
 
 namespace Game.SceneManagement {
   public class ScenePortal : MonoBehaviour {
-    // public int sceneIndexToLoad = 0;
-    // enum PortalIdentifier {
-    //   A, B, C, D, E
-    // }
     [SerializeField]
     ScenePortal_SO scenePortalData;
-    // [SerializeField]
-    // PortalIdentifier portalId;
     [SerializeField]
     Transform spawnPoint;
     private void Awake() {
@@ -29,10 +23,16 @@ namespace Game.SceneManagement {
     }
 
     private IEnumerator TransitionToScene() {
+      // Finding all of the portals in the current scene here so they can all be properly destroyed 
+      // once the scene transition is finished. Another way to do this possibly is to just have the 
+      // spawnTo position data in the SO.
+      ScenePortal[] portals = FindObjectsOfType<ScenePortal>();
       yield return SceneManager.LoadSceneAsync(scenePortalData.SceneIndexToLoad);
       ScenePortal portalToSpawnTo = GetSpawnToPortal();
       SetPlayerPosition(portalToSpawnTo);
-      Destroy(gameObject);
+      foreach (ScenePortal portal in portals) {
+        Destroy(portal.gameObject);
+      }
     }
 
     private void SetPlayerPosition(ScenePortal portal) {
@@ -50,9 +50,6 @@ namespace Game.SceneManagement {
     private ScenePortal GetSpawnToPortal() {
       ScenePortal[] portals = FindObjectsOfType<ScenePortal>();
       foreach (ScenePortal portal in portals) {
-        // Right now this would require you to spawn to another scene - no intra scene portalling
-        // Seems like you could just remove the sceneIndexToLoad but right now not all of the portals
-        // are getting destroyed on load and it's causing conflicts.
         if (portal == this) {
           continue;
         }
