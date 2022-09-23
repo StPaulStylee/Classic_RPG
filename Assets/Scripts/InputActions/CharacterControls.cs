@@ -72,6 +72,54 @@ namespace Game.InputActions
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""QuickActionsController"",
+            ""id"": ""d48cfa44-fb11-44f3-83d7-b03a82441579"",
+            ""actions"": [
+                {
+                    ""name"": ""Save"",
+                    ""type"": ""Button"",
+                    ""id"": ""56d77b6f-a7c8-40d2-a8e8-3aec3c7c53c5"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Load"",
+                    ""type"": ""Button"",
+                    ""id"": ""51312e0d-73ed-4963-b949-8ed0128f9d8d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""6eaf4922-5163-4780-9127-d61c757f5ae6"",
+                    ""path"": ""<Keyboard>/f1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Save"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7b4f9043-a9ef-496a-80a9-c344b62763ce"",
+                    ""path"": ""<Keyboard>/f2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Load"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -86,6 +134,10 @@ namespace Game.InputActions
             m_CharacterController = asset.FindActionMap("CharacterController", throwIfNotFound: true);
             m_CharacterController_Move = m_CharacterController.FindAction("Move", throwIfNotFound: true);
             m_CharacterController_CursorPosition = m_CharacterController.FindAction("CursorPosition", throwIfNotFound: true);
+            // QuickActionsController
+            m_QuickActionsController = asset.FindActionMap("QuickActionsController", throwIfNotFound: true);
+            m_QuickActionsController_Save = m_QuickActionsController.FindAction("Save", throwIfNotFound: true);
+            m_QuickActionsController_Load = m_QuickActionsController.FindAction("Load", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -182,6 +234,47 @@ namespace Game.InputActions
             }
         }
         public CharacterControllerActions @CharacterController => new CharacterControllerActions(this);
+
+        // QuickActionsController
+        private readonly InputActionMap m_QuickActionsController;
+        private IQuickActionsControllerActions m_QuickActionsControllerActionsCallbackInterface;
+        private readonly InputAction m_QuickActionsController_Save;
+        private readonly InputAction m_QuickActionsController_Load;
+        public struct QuickActionsControllerActions
+        {
+            private @CharacterControls m_Wrapper;
+            public QuickActionsControllerActions(@CharacterControls wrapper) { m_Wrapper = wrapper; }
+            public InputAction @Save => m_Wrapper.m_QuickActionsController_Save;
+            public InputAction @Load => m_Wrapper.m_QuickActionsController_Load;
+            public InputActionMap Get() { return m_Wrapper.m_QuickActionsController; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(QuickActionsControllerActions set) { return set.Get(); }
+            public void SetCallbacks(IQuickActionsControllerActions instance)
+            {
+                if (m_Wrapper.m_QuickActionsControllerActionsCallbackInterface != null)
+                {
+                    @Save.started -= m_Wrapper.m_QuickActionsControllerActionsCallbackInterface.OnSave;
+                    @Save.performed -= m_Wrapper.m_QuickActionsControllerActionsCallbackInterface.OnSave;
+                    @Save.canceled -= m_Wrapper.m_QuickActionsControllerActionsCallbackInterface.OnSave;
+                    @Load.started -= m_Wrapper.m_QuickActionsControllerActionsCallbackInterface.OnLoad;
+                    @Load.performed -= m_Wrapper.m_QuickActionsControllerActionsCallbackInterface.OnLoad;
+                    @Load.canceled -= m_Wrapper.m_QuickActionsControllerActionsCallbackInterface.OnLoad;
+                }
+                m_Wrapper.m_QuickActionsControllerActionsCallbackInterface = instance;
+                if (instance != null)
+                {
+                    @Save.started += instance.OnSave;
+                    @Save.performed += instance.OnSave;
+                    @Save.canceled += instance.OnSave;
+                    @Load.started += instance.OnLoad;
+                    @Load.performed += instance.OnLoad;
+                    @Load.canceled += instance.OnLoad;
+                }
+            }
+        }
+        public QuickActionsControllerActions @QuickActionsController => new QuickActionsControllerActions(this);
         private int m_KeyboardSchemeIndex = -1;
         public InputControlScheme KeyboardScheme
         {
@@ -195,6 +288,11 @@ namespace Game.InputActions
         {
             void OnMove(InputAction.CallbackContext context);
             void OnCursorPosition(InputAction.CallbackContext context);
+        }
+        public interface IQuickActionsControllerActions
+        {
+            void OnSave(InputAction.CallbackContext context);
+            void OnLoad(InputAction.CallbackContext context);
         }
     }
 }

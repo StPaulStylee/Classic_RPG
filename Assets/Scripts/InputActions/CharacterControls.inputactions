@@ -11,7 +11,8 @@
                     "id": "67f70b87-89f0-4e21-ba74-5f63398d8c36",
                     "expectedControlType": "Button",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": false
                 },
                 {
                     "name": "CursorPosition",
@@ -19,7 +20,8 @@
                     "id": "63ab20a1-f7cd-43c7-9f36-a354fa940240",
                     "expectedControlType": "Vector2",
                     "processors": "",
-                    "interactions": ""
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -42,6 +44,54 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "CursorPosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "QuickActionsController",
+            "id": "d48cfa44-fb11-44f3-83d7-b03a82441579",
+            "actions": [
+                {
+                    "name": "Save",
+                    "type": "Button",
+                    "id": "56d77b6f-a7c8-40d2-a8e8-3aec3c7c53c5",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Load",
+                    "type": "Button",
+                    "id": "51312e0d-73ed-4963-b949-8ed0128f9d8d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "6eaf4922-5163-4780-9127-d61c757f5ae6",
+                    "path": "<Keyboard>/f1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Save",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7b4f9043-a9ef-496a-80a9-c344b62763ce",
+                    "path": "<Keyboard>/f2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Load",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

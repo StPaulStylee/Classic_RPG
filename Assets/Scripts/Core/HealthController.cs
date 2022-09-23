@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Game.Saving;
+using Game.Saving.Types;
 using UnityEngine;
 
 namespace Game.Core {
   [RequireComponent(typeof(Animator), typeof(ActionScheduler))]
-  public class HealthController : MonoBehaviour {
+  public class HealthController : MonoBehaviour, ISaveable {
     [Tooltip("The amount of health/hp given to the assiged game object")]
     [SerializeField]
     private float currentHealth = 100f;
@@ -33,6 +35,26 @@ namespace Game.Core {
       IsDead = true;
       animator.SetTrigger(onDieHash);
       actionScheduler.CancelCurrentAction();
+    }
+
+    private void SetAnimationState() {
+      if (IsDead) {
+        animator.SetTrigger(onDieHash);
+      }
+    }
+
+    public object CaptureState() {
+      HealthData data = new HealthData();
+      data.CurrentHealth = currentHealth;
+      data.IsDead = IsDead;
+      return data;
+    }
+
+    public void RestoreState(object state) {
+      HealthData data = (HealthData)state;
+      currentHealth = data.CurrentHealth;
+      IsDead = data.IsDead;
+      SetAnimationState();
     }
   }
 }
