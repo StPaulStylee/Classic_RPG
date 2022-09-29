@@ -22,13 +22,32 @@ namespace Game.SceneManagement {
       yield return new WaitForSeconds(fadeWaitTime);
     }
 
+    public void SetToMaxOpacity() {
+      canvasGroup.alpha = 1f;
+    }
+
     public IEnumerator FadeIn() {
       while (canvasGroup.alpha < 1f) {
         canvasGroup.alpha += Time.deltaTime / fadeTime;
         yield return null;
       }
     }
+
+    public IEnumerator FadeIn(float fadeTime) {
+      while (canvasGroup.alpha < 1f) {
+        canvasGroup.alpha += Time.deltaTime / fadeTime;
+        yield return null;
+      }
+    }
+
     public IEnumerator FadeOut() {
+      while (canvasGroup.alpha > 0f) {
+        canvasGroup.alpha -= Time.deltaTime / fadeTime;
+        yield return null;
+      }
+    }
+
+    public IEnumerator FadeOut(float fadeTime) {
       while (canvasGroup.alpha > 0f) {
         canvasGroup.alpha -= Time.deltaTime / fadeTime;
         yield return null;

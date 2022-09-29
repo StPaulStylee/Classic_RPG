@@ -468,6 +468,10 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: -0.028551012
       objectReference: {fileID: 0}
+    - target: {fileID: 7054901930250045023, guid: 2970356d4df27c44d82b86c2edc0af95, type: 3}
+      propertyPath: uniqueIdentifier
+      value: Player_0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2970356d4df27c44d82b86c2edc0af95, type: 3}
 --- !u!4 &47210276671031692 stripped

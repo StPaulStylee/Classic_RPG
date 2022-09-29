@@ -5,17 +5,24 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.AI;
 using Game.SceneManagement.SO;
+using Game.Saving;
 
 namespace Game.SceneManagement {
-  public class ScenePortal : MonoBehaviour {
-    [SerializeField] ScenePortal_SO scenePortalData;
-    [SerializeField] Transform spawnPoint;
+  public class ScenePortal : MonoBehaviour, ISaveable {
+    [SerializeField] private ScenePortal_SO scenePortalData;
+    [SerializeField] private Transform spawnPoint;
     [SerializeField] Fader sceneFadeInOut;
+
+    private SavingWrapper savingWrapper;
     private void Awake() {
       DontDestroyOnLoad(gameObject);
     }
 
     private void Start() {
+      savingWrapper = FindObjectOfType<SavingWrapper>();
+      if (savingWrapper == null) {
+        Debug.LogError("The saving wrapper is not available in the scene!");
+      }
       if (sceneFadeInOut == null) {
         sceneFadeInOut = FindObjectOfType<Fader>();
       }
@@ -33,9 +40,12 @@ namespace Game.SceneManagement {
       // Finding all of the portals in the current scene here so they can all be properly destroyed 
       // once the scene transition is finished.
       ScenePortal[] portals = FindObjectsOfType<ScenePortal>();
+      savingWrapper.Save();
       yield return SceneManager.LoadSceneAsync(scenePortalData.SceneIndexToLoad);
+      savingWrapper.Load();
       ScenePortal portalToSpawnTo = GetSpawnToPortal();
       SetPlayerPosition(portalToSpawnTo);
+      savingWrapper.Save();
       yield return sceneFadeInOut.FadeWait();
       yield return sceneFadeInOut.FadeOut();
       foreach (ScenePortal portal in portals) {
@@ -67,6 +77,14 @@ namespace Game.SceneManagement {
         return portal;
       }
       return null;
+    }
+
+    public object CaptureState() {
+      throw new NotImplementedException();
+    }
+
+    public void RestoreState(object state) {
+      throw new NotImplementedException();
     }
   }
 }

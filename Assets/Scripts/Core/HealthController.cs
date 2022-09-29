@@ -10,6 +10,7 @@ namespace Game.Core {
     [Tooltip("The amount of health/hp given to the assiged game object")]
     [SerializeField]
     private float currentHealth = 100f;
+    [field: SerializeField]
     public bool IsDead { get; private set; } = false;
     private Animator animator;
     private ActionScheduler actionScheduler;
@@ -38,6 +39,7 @@ namespace Game.Core {
     }
 
     private void SetAnimationState() {
+      animator.Play("Base Layer.Movement", 0, 0);
       if (IsDead) {
         animator.SetTrigger(onDieHash);
       }

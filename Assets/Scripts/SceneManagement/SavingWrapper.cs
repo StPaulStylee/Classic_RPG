@@ -12,19 +12,31 @@ namespace Game.SceneManagement {
     const string defaultSaveFile = "save";
     private CharacterControls playerInput;
     private SavingSystem savingSystem;
+    private Fader sceneFadeInOut;
     void Awake() {
       savingSystem = GetComponent<SavingSystem>();
+
       playerInput = new CharacterControls();
       playerInput.QuickActionsController.Enable();
       playerInput.QuickActionsController.Save.performed += OnSave;
       playerInput.QuickActionsController.Load.performed += OnLoad;
     }
 
+    private IEnumerator Start() {
+      sceneFadeInOut = FindObjectOfType<Fader>();
+      if (sceneFadeInOut == null) {
+        Debug.LogError("No Fader component found in scene!");
+      }
+      sceneFadeInOut.SetToMaxOpacity();
+      yield return savingSystem.LoadLastScene(defaultSaveFile);
+      yield return sceneFadeInOut.FadeOut(1.5f);
+    }
+
     private void OnSave(InputAction.CallbackContext ctx) {
       Save();
     }
 
-    private void Save() {
+    public void Save() {
       savingSystem.Save(defaultSaveFile);
     }
 
@@ -32,7 +44,7 @@ namespace Game.SceneManagement {
       Load();
     }
 
-    private void Load() {
+    public void Load() {
       savingSystem.Load(defaultSaveFile);
     }
   }
