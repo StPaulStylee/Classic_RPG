@@ -1469,7 +1469,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 843298067}
-  m_LocalRotation: {x: 0.102467656, y: -0.7513409, z: 0.12015472, w: 0.6407418}
+  m_LocalRotation: {x: 0.10246765, y: -0.7513409, z: 0.12015469, w: 0.6407418}
   m_LocalPosition: {x: 89.008606, y: 13.852426, z: 158.98563}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -2536,6 +2536,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac7117bc850820547aad79e594953555, type: 3}
+--- !u!4 &1499794031 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1336366373451842556, guid: 507357455939b7447bc929003f75d70a, type: 3}
+  m_PrefabInstance: {fileID: 1985393298}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1515943897 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5324103590110619049, guid: 507357455939b7447bc929003f75d70a, type: 3}
@@ -3118,6 +3123,14 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: 123.00679
       objectReference: {fileID: 0}
+    - target: {fileID: 5626863072398251090, guid: 507357455939b7447bc929003f75d70a, type: 3}
+      propertyPath: weaponPrefab
+      value: 
+      objectReference: {fileID: 1104172259794306, guid: c93dc5e6b62380f499e6ec8328bc0160, type: 3}
+    - target: {fileID: 5626863072398251090, guid: 507357455939b7447bc929003f75d70a, type: 3}
+      propertyPath: handTransform
+      value: 
+      objectReference: {fileID: 1499794031}
     - target: {fileID: 7695518299644036859, guid: 507357455939b7447bc929003f75d70a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 21.061375

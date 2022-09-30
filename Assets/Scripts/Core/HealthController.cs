@@ -46,9 +46,10 @@ namespace Game.Core {
     }
 
     public object CaptureState() {
-      HealthData data = new HealthData();
-      data.CurrentHealth = currentHealth;
-      data.IsDead = IsDead;
+      HealthData data = new() {
+        CurrentHealth = currentHealth,
+        IsDead = IsDead
+      };
       return data;
     }
 

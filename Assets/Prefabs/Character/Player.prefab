@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &577284506717080339
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6943992889928095433}
+  m_Layer: 3
+  m_Name: WeaponR
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6943992889928095433
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 577284506717080339}
+  m_LocalRotation: {x: 0.96542764, y: 0.1330857, z: -0.012462448, w: 0.2237911}
+  m_LocalPosition: {x: 0.106, y: 0.018, z: -0.076}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 861882254631109764}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 25.812, y: 177.74, z: 163.784}
 --- !u!1001 &857750083864851856
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -303,6 +334,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 1779977906774404, guid: beecc60259940fb4883c123adc4e992f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1786947992109376, guid: beecc60259940fb4883c123adc4e992f, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -397,6 +432,11 @@ PrefabInstance:
       objectReference: {fileID: 9000000, guid: ffdfcb810f2918b4f8fe9f917f07bc78, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: beecc60259940fb4883c123adc4e992f, type: 3}
+--- !u!4 &861882254631109764 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4875715716804884, guid: beecc60259940fb4883c123adc4e992f, type: 3}
+  m_PrefabInstance: {fileID: 857750083864851856}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1576185571411467390
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -499,6 +539,8 @@ MonoBehaviour:
   range: 2
   damage: 5
   timeBetweenAttack: 1
+  weaponPrefab: {fileID: 0}
+  handTransform: {fileID: 0}
 --- !u!114 &6273439138648993260
 MonoBehaviour:
   m_ObjectHideFlags: 0

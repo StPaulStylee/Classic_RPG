@@ -9,14 +9,19 @@ namespace Game.Actions.Combat {
   [RequireComponent(typeof(Animator))]
   public class AttackController : MonoBehaviour, IAction {
     [Tooltip("The range (in units) the character must be within to perform an attack. Character will move to within range if Attack() is called when not within range.")]
-    [SerializeField]
-    private float range = 2f;
+    [SerializeField] private float range = 2f;
+
     [Tooltip("The amount of damage the character will deliver on each attack routine.")]
-    [SerializeField]
-    private float damage = 5f;
+    [SerializeField] private float damage = 5f;
+
     [Tooltip("This set's the required delay between each attack iteration. The larger the value, the slower the attack.")]
-    [SerializeField]
-    private float timeBetweenAttack = 0f;
+    [SerializeField] private float timeBetweenAttack = 0f;
+
+    [Tooltip("The weapon that the character is wielding. null is equal to no weapon")]
+    [SerializeField] private GameObject weaponPrefab = null;
+
+    [Tooltip("The location of the weapon")]
+    [SerializeField] private Transform handTransform = null;
     private float timeSincelastAttack = Mathf.Infinity;
     private HealthController target;
     private MoveController moveController;
@@ -33,6 +38,9 @@ namespace Game.Actions.Combat {
       onStopAttackHash = Animator.StringToHash("onStopAttack");
       if (moveController == null) {
         Debug.LogError($"{gameObject.name} attempting to assign instance field in {name} but it isn't assigned.");
+      }
+      if (weaponPrefab && handTransform) {
+        Instantiate(weaponPrefab, handTransform);
       }
     }
 

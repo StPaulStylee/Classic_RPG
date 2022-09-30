@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Game.Core;
 using Game.Saving;
+using Game.Saving.Types;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -60,15 +61,19 @@ namespace Game.Actions.Movement {
     }
 
     public object CaptureState() {
-      return new SerializableVector3(transform.position);
+      TransformData data = new();
+      data.Position = new SerializableVector3(transform.position);
+      data.Rotation = new SerializableVector3(transform.eulerAngles);
+      return data;
     }
 
     public void RestoreState(object state) {
-      SerializableVector3 position = (SerializableVector3)state;
+      TransformData transformData = (TransformData)state;
       // Sometimes the nav mesh will mess with setting the positoin so disabling 
       // and enabling it fixes that.
       navMeshAgent.enabled = false;
-      transform.position = position.ToVector();
+      transform.position = transformData.Position.ToVector();
+      transform.eulerAngles = transformData.Rotation.ToVector();
       navMeshAgent.enabled = true;
     }
   }
