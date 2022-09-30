@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f45e75017f5804348914fc22c77c19ce, type: 3}
+  m_Name: Fire_Axe_SO
+  m_EditorClassIdentifier: 
+  overrideController: {fileID: 22100000, guid: 031b646d4e9785e4d9a3613e2cab8413, type: 2}
+  weaponPrefab: {fileID: 4079769842837743820, guid: 7b60a0f1a3e01ac4db029c785b57c242, type: 3}
+  <Range>k__BackingField: 2
+  <Damage>k__BackingField: 5
+  <TimeBetweenAttack>k__BackingField: 3

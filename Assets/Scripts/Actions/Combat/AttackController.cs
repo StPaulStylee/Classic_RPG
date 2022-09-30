@@ -8,20 +8,20 @@ using UnityEngine;
 namespace Game.Actions.Combat {
   [RequireComponent(typeof(Animator))]
   public class AttackController : MonoBehaviour, IAction {
-    [Tooltip("The range (in units) the character must be within to perform an attack. Character will move to within range if Attack() is called when not within range.")]
-    [SerializeField] private float range = 2f;
+    // [Tooltip("The range (in units) the character must be within to perform an attack. Character will move to within range if Attack() is called when not within range.")]
+    // [SerializeField] private float range = 2f;
 
-    [Tooltip("The amount of damage the character will deliver on each attack routine.")]
-    [SerializeField] private float damage = 5f;
+    // [Tooltip("The amount of damage the character will deliver on each attack routine.")]
+    // [SerializeField] private float damage = 5f;
 
-    [Tooltip("This set's the required delay between each attack iteration. The larger the value, the slower the attack.")]
-    [SerializeField] private float timeBetweenAttack = 0f;
-
-    [Tooltip("The weapon that the character is wielding. null is equal to no weapon")]
-    [SerializeField] private GameObject weaponPrefab = null;
+    // [Tooltip("This set's the required delay between each attack iteration. The larger the value, the slower the attack.")]
+    // [SerializeField] private float timeBetweenAttack = 0f;
 
     [Tooltip("The location of the weapon")]
     [SerializeField] private Transform handTransform = null;
+
+    [Tooltip("The weapon scriptable object to assign to the character")]
+    [SerializeField] private Weapon weaponSO = null;
     private float timeSincelastAttack = Mathf.Infinity;
     private HealthController target;
     private MoveController moveController;
@@ -39,8 +39,15 @@ namespace Game.Actions.Combat {
       if (moveController == null) {
         Debug.LogError($"{gameObject.name} attempting to assign instance field in {name} but it isn't assigned.");
       }
-      if (weaponPrefab && handTransform) {
-        Instantiate(weaponPrefab, handTransform);
+    }
+
+    private void Start() {
+      SpawnWeapon();
+    }
+
+    private void SpawnWeapon() {
+      if (weaponSO && handTransform) {
+        weaponSO.Spawn(handTransform, animator);
       }
     }
 
@@ -87,7 +94,7 @@ namespace Game.Actions.Combat {
 
     public bool IsWithinRange(GameObject target) {
       float distance = Vector3.Distance(transform.position, target.transform.position);
-      if (distance > range) {
+      if (distance > weaponSO.Range) {
         return false;
       }
       return true;
@@ -108,12 +115,12 @@ namespace Game.Actions.Combat {
     }
 
     private bool IsAttackEnabled() {
-      return timeSincelastAttack >= timeBetweenAttack;
+      return timeSincelastAttack >= weaponSO.TimeBetweenAttack;
     }
 
     private bool IsWithinRange() {
       float distance = Vector3.Distance(transform.position, target.transform.position);
-      if (distance > range) {
+      if (distance > weaponSO.Range) {
         return false;
       }
       return true;
@@ -124,7 +131,7 @@ namespace Game.Actions.Combat {
       if (target == null) {
         return;
       }
-      target.TakeDamage(damage);
+      target.TakeDamage(weaponSO.Damage);
     }
   }
 }

@@ -24,7 +24,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 577284506717080339}
   m_LocalRotation: {x: 0.96542764, y: 0.1330857, z: -0.012462448, w: 0.2237911}
-  m_LocalPosition: {x: 0.106, y: 0.018, z: -0.076}
+  m_LocalPosition: {x: 0.103, y: 0.054, z: -0.001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -539,8 +539,8 @@ MonoBehaviour:
   range: 2
   damage: 5
   timeBetweenAttack: 1
-  weaponPrefab: {fileID: 0}
   handTransform: {fileID: 0}
+  weaponSO: {fileID: 0}
 --- !u!114 &6273439138648993260
 MonoBehaviour:
   m_ObjectHideFlags: 0
