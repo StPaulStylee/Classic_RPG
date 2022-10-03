@@ -18,10 +18,12 @@ namespace Game.Actions.Combat {
     // [SerializeField] private float timeBetweenAttack = 0f;
 
     [Tooltip("The location of the weapon")]
-    [SerializeField] private Transform handTransform = null;
+    [SerializeField] private Transform rightHandTransform = null;
+    [SerializeField] private Transform leftHandTransform = null;
 
     [Tooltip("The weapon scriptable object to assign to the character")]
-    [SerializeField] private Weapon weaponSO = null;
+    [SerializeField] private Weapon defaultWeaponSO = null;
+    [SerializeField] private Weapon currentWeaponSO = null;
     private float timeSincelastAttack = Mathf.Infinity;
     private HealthController target;
     private MoveController moveController;
@@ -42,13 +44,7 @@ namespace Game.Actions.Combat {
     }
 
     private void Start() {
-      SpawnWeapon();
-    }
-
-    private void SpawnWeapon() {
-      if (weaponSO && handTransform) {
-        weaponSO.Spawn(handTransform, animator);
-      }
+      EquipWeapon(defaultWeaponSO);
     }
 
     private void Update() {
@@ -56,6 +52,13 @@ namespace Game.Actions.Combat {
       if (target != null && IsWithinRange()) {
         moveController.Cancel();
         ExecuteAttackRoutine();
+      }
+    }
+
+    public void EquipWeapon(Weapon weaponSO) {
+      if (weaponSO && rightHandTransform) {
+        currentWeaponSO = weaponSO;
+        weaponSO.Spawn(rightHandTransform, leftHandTransform, animator);
       }
     }
 
@@ -94,7 +97,7 @@ namespace Game.Actions.Combat {
 
     public bool IsWithinRange(GameObject target) {
       float distance = Vector3.Distance(transform.position, target.transform.position);
-      if (distance > weaponSO.Range) {
+      if (distance > currentWeaponSO.Range) {
         return false;
       }
       return true;
@@ -115,23 +118,30 @@ namespace Game.Actions.Combat {
     }
 
     private bool IsAttackEnabled() {
-      return timeSincelastAttack >= weaponSO.TimeBetweenAttack;
+      return timeSincelastAttack >= currentWeaponSO.TimeBetweenAttack;
     }
 
     private bool IsWithinRange() {
       float distance = Vector3.Distance(transform.position, target.transform.position);
-      if (distance > weaponSO.Range) {
+      if (distance > currentWeaponSO.Range) {
         return false;
       }
       return true;
     }
 
-    // Animation Event
+    // Animation Events
     private void Hit() {
       if (target == null) {
         return;
       }
-      target.TakeDamage(weaponSO.Damage);
+      target.TakeDamage(currentWeaponSO.Damage);
+    }
+
+    private void Shoot() {
+      if (target == null) {
+        return;
+      }
+      target.TakeDamage(currentWeaponSO.Damage);
     }
   }
 }

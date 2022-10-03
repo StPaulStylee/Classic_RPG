@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f45e75017f5804348914fc22c77c19ce, type: 3}
+  m_Name: SimpleBow_SO
+  m_EditorClassIdentifier: 
+  overrideController: {fileID: 22100000, guid: c331ab92d48da5d4d9e84ca6908dbb8e, type: 2}
+  weaponPrefab: {fileID: 4580923259484102741, guid: 8eedb7127578f9344bca8f9871bc7df4, type: 3}
+  isRightHanded: 0
+  <Range>k__BackingField: 20
+  <Damage>k__BackingField: 2
+  <TimeBetweenAttack>k__BackingField: 3

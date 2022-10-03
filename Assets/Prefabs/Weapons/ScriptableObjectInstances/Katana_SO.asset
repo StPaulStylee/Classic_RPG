@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Katana_SO
   m_EditorClassIdentifier: 
   overrideController: {fileID: 22100000, guid: ed5201889ec8eff46a02ac2df5a5ddb9, type: 2}
-  weaponPrefab: {fileID: 1104172259794306, guid: c93dc5e6b62380f499e6ec8328bc0160, type: 3}
+  weaponPrefab: {fileID: 6101634897516871588, guid: 08269d2138c8d5f4c8b8c310e49f88a1, type: 3}
+  isRightHanded: 1
   <Range>k__BackingField: 2
   <Damage>k__BackingField: 2.5
   <TimeBetweenAttack>k__BackingField: 1
