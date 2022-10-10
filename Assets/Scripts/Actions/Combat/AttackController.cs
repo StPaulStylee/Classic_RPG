@@ -8,15 +8,8 @@ using UnityEngine;
 namespace Game.Actions.Combat {
   [RequireComponent(typeof(Animator))]
   public class AttackController : MonoBehaviour, IAction {
-    // [Tooltip("The range (in units) the character must be within to perform an attack. Character will move to within range if Attack() is called when not within range.")]
-    // [SerializeField] private float range = 2f;
-
-    // [Tooltip("The amount of damage the character will deliver on each attack routine.")]
-    // [SerializeField] private float damage = 5f;
-
-    // [Tooltip("This set's the required delay between each attack iteration. The larger the value, the slower the attack.")]
-    // [SerializeField] private float timeBetweenAttack = 0f;
-
+    // public delegate void ProjectileHitDelegate();
+    // public static ProjectileHitDelegate OnProjectileHit = delegate { };
     [Tooltip("The location of the weapon")]
     [SerializeField] private Transform rightHandTransform = null;
     [SerializeField] private Transform leftHandTransform = null;
@@ -56,7 +49,7 @@ namespace Game.Actions.Combat {
     }
 
     public void EquipWeapon(Weapon weaponSO) {
-      if (weaponSO && rightHandTransform) {
+      if (weaponSO && (rightHandTransform || leftHandTransform)) {
         currentWeaponSO = weaponSO;
         weaponSO.Spawn(rightHandTransform, leftHandTransform, animator);
       }
@@ -117,6 +110,10 @@ namespace Game.Actions.Combat {
       }
     }
 
+    // private void OnProjectileHit() {
+    //   target.TakeDamage(currentWeaponSO.Damage);
+    // }
+
     private bool IsAttackEnabled() {
       return timeSincelastAttack >= currentWeaponSO.TimeBetweenAttack;
     }
@@ -141,7 +138,9 @@ namespace Game.Actions.Combat {
       if (target == null) {
         return;
       }
-      target.TakeDamage(currentWeaponSO.Damage);
+      if (currentWeaponSO.HasProjectile) {
+        currentWeaponSO.FireProjectile(rightHandTransform, leftHandTransform, target);
+      }
     }
   }
 }
