@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8109015487337311774}
   m_Layer: 0
   m_Name: Katana_Holding
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -42,6 +42,10 @@ PrefabInstance:
     - target: {fileID: 1104172259794306, guid: b0eef150067ec8745886a560ce01eb96, type: 3}
       propertyPath: m_Name
       value: Katana
+      objectReference: {fileID: 0}
+    - target: {fileID: 1104172259794306, guid: b0eef150067ec8745886a560ce01eb96, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 4330684416138322, guid: b0eef150067ec8745886a560ce01eb96, type: 3}
       propertyPath: m_RootOrder

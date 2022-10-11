@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Game.Actions.Movement;
 using Game.Core;
+using Game.Saving;
 using UnityEngine;
 
 namespace Game.Actions.Combat {
@@ -49,6 +50,7 @@ namespace Game.Actions.Combat {
     }
 
     public void EquipWeapon(Weapon weaponSO) {
+      DestroyCurrentWeapon();
       if (weaponSO && (rightHandTransform || leftHandTransform)) {
         currentWeaponSO = weaponSO;
         weaponSO.Spawn(rightHandTransform, leftHandTransform, animator);
@@ -74,20 +76,6 @@ namespace Game.Actions.Combat {
       target = null;
     }
 
-    private void ExecuteAttackRoutine() {
-      if (target.GetComponent<HealthController>().IsDead) {
-        Cancel();
-        return;
-      }
-      if (IsAttackEnabled()) {
-        Attack();
-        animator.ResetTrigger(onStopAttackHash);
-        transform.LookAt(target.transform);
-        animator.SetTrigger(onAttackHash);
-        timeSincelastAttack = 0f;
-      }
-    }
-
     public bool IsWithinRange(GameObject target) {
       float distance = Vector3.Distance(transform.position, target.transform.position);
       if (distance > currentWeaponSO.Range) {
@@ -110,9 +98,25 @@ namespace Game.Actions.Combat {
       }
     }
 
-    // private void OnProjectileHit() {
-    //   target.TakeDamage(currentWeaponSO.Damage);
-    // }
+    private void DestroyCurrentWeapon() {
+      if (currentWeaponSO) {
+        currentWeaponSO.Remove();
+      }
+    }
+
+    private void ExecuteAttackRoutine() {
+      if (target.GetComponent<HealthController>().IsDead) {
+        Cancel();
+        return;
+      }
+      if (IsAttackEnabled()) {
+        Attack();
+        animator.ResetTrigger(onStopAttackHash);
+        transform.LookAt(target.transform);
+        animator.SetTrigger(onAttackHash);
+        timeSincelastAttack = 0f;
+      }
+    }
 
     private bool IsAttackEnabled() {
       return timeSincelastAttack >= currentWeaponSO.TimeBetweenAttack;

@@ -7,7 +7,6 @@ namespace Game.Actions.Combat {
   [CreateAssetMenu(fileName = "Weapon_SO", menuName = "Weapons/New Weapon", order = 0)]
   public class Weapon : ScriptableObject {
     public bool HasProjectile => projectile != null;
-
     [SerializeField] private AnimatorOverrideController overrideController;
     [Tooltip("The weapon that the character is wielding. null is equal to no weapon")]
     [SerializeField] private GameObject weaponPrefab = null;
@@ -23,6 +22,7 @@ namespace Game.Actions.Combat {
 
     [field: Tooltip("This set's the required delay between each attack iteration. The larger the value, the slower the attack.")]
     [field: SerializeField] public float TimeBetweenAttack { get; private set; }
+    private GameObject instance;
 
     public void FireProjectile(Transform rightHand, Transform leftHand, HealthController target) {
       Transform handTransform = isRightHanded ? rightHand : leftHand;
@@ -31,10 +31,14 @@ namespace Game.Actions.Combat {
       projectile.SetTarget(target);
     }
 
+    public void Remove() {
+      Destroy(instance);
+    }
+
     public void Spawn(Transform rightHand, Transform leftHand, Animator animator) {
       if (weaponPrefab) {
         Transform handTransform = isRightHanded ? rightHand : leftHand;
-        Instantiate(weaponPrefab, handTransform);
+        instance = Instantiate(weaponPrefab, handTransform);
       }
       if (overrideController) {
         animator.runtimeAnimatorController = overrideController;

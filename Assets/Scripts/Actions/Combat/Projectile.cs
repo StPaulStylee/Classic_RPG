@@ -8,6 +8,7 @@ namespace Game.Actions.Combat {
     [SerializeField] private HealthController target;
     [SerializeField] private float speed;
     [SerializeField] private TrailRenderer trailRenderer;
+    [SerializeField] private bool isHoming;
     public float Damage { private get; set; }
     private float timeUntilDestroy = 0f;
 
@@ -20,9 +21,15 @@ namespace Game.Actions.Combat {
       }
     }
 
+    private void Start() {
+      transform.LookAt(GetLookAtPosition());
+    }
+
     private void Update() {
-      if (target) {
+      if (isHoming) {
         transform.LookAt(GetLookAtPosition());
+      }
+      if (target) {
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
       }
     }

@@ -97,7 +97,7 @@ GameObject:
   - component: {fileID: 3236655768344036433}
   m_Layer: 0
   m_Name: Bat_Metal
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using Game.Actions.Combat;
 using UnityEngine;
 
 namespace Game.Actions.Combat {
-  [RequireComponent(typeof(BoxCollider), typeof(Weapon))]
   public class WeaponPickup : MonoBehaviour {
     [SerializeField] private Weapon weaponSO;
     private void OnTriggerEnter(Collider other) {

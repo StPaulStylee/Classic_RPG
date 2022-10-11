@@ -180,9 +180,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  speed: 40
-  timeUntilDestroy: 0.2
+  speed: 10
   trailRenderer: {fileID: 0}
+  isHoming: 0
 --- !u!54 &8091887562961705133
 Rigidbody:
   m_ObjectHideFlags: 0

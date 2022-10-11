@@ -9,6 +9,7 @@ using UnityEngine.SceneManagement;
 
 namespace Game.Saving {
   public class SavingSystem : MonoBehaviour {
+    // C:\Users\mille\AppData\LocalLow\DefaultCompany\RPG_GameDevTv
     public IEnumerator LoadLastScene(string saveFile) {
       Dictionary<string, object> state = LoadFile(saveFile);
       int buildIndex = SceneManager.GetActiveScene().buildIndex;
